@@ -2,6 +2,8 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/obj/Debug
-/obj/Release
-/.vs
+/.vs/StringsComparison/v15
+/Compare Example/bin/Debug
+/StringsComparion/bin/Debug
+/Compare Example/obj/Debug
+/StringsComparion/obj
