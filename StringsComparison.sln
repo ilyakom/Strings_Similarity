@@ -1,7 +1,10 @@
-
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2027
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StringsComparison", "StringsComparison.csproj", "{2B53F789-9EE5-4277-8DB7-F1BC6F6D49D3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Compare Example", "..\Compare Example\Compare Example.csproj", "{9492F7F8-13FF-42DF-B4C8-77C285E0852C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,8 +16,15 @@ Global
 		{2B53F789-9EE5-4277-8DB7-F1BC6F6D49D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2B53F789-9EE5-4277-8DB7-F1BC6F6D49D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2B53F789-9EE5-4277-8DB7-F1BC6F6D49D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9492F7F8-13FF-42DF-B4C8-77C285E0852C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9492F7F8-13FF-42DF-B4C8-77C285E0852C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9492F7F8-13FF-42DF-B4C8-77C285E0852C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9492F7F8-13FF-42DF-B4C8-77C285E0852C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EC75284B-41F6-4765-A8B5-0A33C23617CA}
 	EndGlobalSection
 EndGlobal
