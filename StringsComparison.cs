@@ -173,40 +173,38 @@ public class StringsComparison
 	/// <summary>
 	/// Levenshtein distance calculation
 	/// </summary>
-	/// <param name="str1"></param>
-	/// <param name="str2"></param>
+	/// <param name="original"></param>
+	/// <param name="modified"></param>
 	/// <returns></returns>
-	private static int EditDistance(string str1, string str2)
+	private static int EditDistance(string original, string modified)
 	{
-		var length1 = str1.Length;
-		var length2 = str2.Length;
-		var numArray = new int[length1 + 1, length2 + 1];
-
-		for (var i = 0; i <= length1; ++i)
-			numArray[i, 0] = i;
-
-		for (var i = 0; i <= length2; ++i)
-			numArray[0, i] = i;
-
-		for (var i = 1; i <= length1; ++i)
+		var length1 = original.Length;
+		var length2 = modified.Length;
+		var numArray1 = new int[length1 + 1, length2 + 1];
+		for (var index = 0; index <= length1; ++index)
+			numArray1[index, 0] = index;
+		for (var index = 0; index <= length2; ++index)
+			numArray1[0, index] = index;
+		for (var index1 = 1; index1 <= length1; ++index1)
 		{
-			for (var j = 1; j <= length2; ++j)
+			for (var index2 = 1; index2 <= length2; ++index2)
 			{
-				var num = str2[j - 1] == str1[i - 1] ? 0 : 1;
+				var num = modified[index2 - 1] == original[index1 - 1] ? 0 : 1;
 				var numArray2 = new[]
 				{
-					numArray[i - 1, j] + 1,
-					numArray[i, j - 1] + 1,
-					numArray[i - 1, j - 1] + num
+					numArray1[index1 - 1, index2] + 1,
+					numArray1[index1, index2 - 1] + 1,
+					numArray1[index1 - 1, index2 - 1] + num
 				};
 
-				numArray[i, j] = numArray2.Min();
-				if (i > 1 && j > 1 && str1[i - 1] == str2[j - 2] && str1[i - 2] == str2[j - 1])
-					numArray[i, j] = Math.Min(numArray[i, j], numArray[i - 2, j - 2] + num);
+				numArray1[index1, index2] = numArray2.Min();
+				if (index1 > 1 && index2 > 1 && original[index1 - 1] == modified[index2 - 2] &&
+				    original[index1 - 2] == modified[index2 - 1])
+					numArray1[index1, index2] = Math.Min(numArray1[index1, index2], numArray1[index1 - 2, index2 - 2] + num);
 			}
 		}
 
-		return numArray[length1, length2];
+		return numArray1[length1, length2];
 	}
 
 	/// <summary>
@@ -232,11 +230,10 @@ public class StringsComparison
 	/// </summary>
 	private static void ZeroRowsAndCols(int row, int col, ref double[,] originalArray)
 	{
-		for (var i = 0; i < originalArray.GetLength(0); ++i)
-			originalArray[i, col] = 0.0;
-
-		for (var i = 0; i < originalArray.GetLength(1); ++i)
-			originalArray[row, i] = 0.0;
+		for (var index = 0; index < originalArray.GetLength(0); ++index)
+			originalArray[index, col] = 0.0;
+		for (var index = 0; index < originalArray.GetLength(1); ++index)
+			originalArray[row, index] = 0.0;
 	}
 
 	/// <summary>
@@ -271,12 +268,12 @@ public class StringsComparison
 		var num1 = Math.Max(val1, val2);
 		var num2 = 0.0;
 
-		for (var i = 0; i < array1.Length; ++i)
+		for (var index1 = 0; index1 < array1.Length; ++index1)
 		{
-			for (var j = 0; j < array2.Length; ++j)
+			for (var index2 = 0; index2 < array2.Length; ++index2)
 			{
-				var maxLength = Math.Max(array1[i].Length, array2[j].Length);
-				originalArray[i, j] = CompareWords(array1[i], array2[j], maxLength) * ((val1 > val2 ? array1[i].Length : array2[j].Length) / (double) num1);
+				var maxLength = Math.Max(array1[index1].Length, array2[index2].Length);
+				originalArray[index1, index2] = CompareWords(array1[index1], array2[index2], maxLength) * ((val1 > val2 ? array1[index1].Length : array2[index2].Length) / (double) num1);
 			}
 		}
 
