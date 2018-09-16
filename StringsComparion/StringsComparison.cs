@@ -3,7 +3,7 @@ using System;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-public class StringsComparison
+public static class StringsComparison
 {
 	/// <summary>
 	/// significant words pattern
@@ -260,11 +260,14 @@ public class StringsComparison
 	[SqlFunction(FillRowMethodName = "CompareStrings")]
 	public static double CompareStrings(string str1, string str2)
 	{
+		if (str1 == null) throw new ArgumentNullException(nameof(str1));
+		if (str2 == null) throw new ArgumentNullException(nameof(str2));
+
 		var array1 = Regex.Split(Tranliterate(str1.ToLower()), SplitPattern).Where(x => !string.IsNullOrWhiteSpace(x)).ToArray();
 		var array2 = Regex.Split(Tranliterate(str2.ToLower()), SplitPattern).Where(x => !string.IsNullOrWhiteSpace(x)).ToArray();
 
-		if (str1.Length == 0 || str2.Length == 0)
-			return 0.0;
+		if (array1.Length == 0 && array2.Length == 0) return 1;
+
 		var originalArray = new double[array1.Length, array2.Length];
 		var val1 = array1.Select(x => x.Length).Sum();
 		var val2 = array2.Select(x => x.Length).Sum();
